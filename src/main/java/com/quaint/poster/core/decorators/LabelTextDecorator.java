@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 绘制标签文本 一行多个并排标签.
+ * 标签文本装饰, 一行多个并排标签.
  *
  * @author quaint
  * @date 21 February 2020

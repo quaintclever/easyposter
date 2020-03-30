@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 /**
- * 朋友圈海报
+ * eg: 朋友圈海报
  * @author quaint
  * @date 21 February 2020
  * @since 1.0

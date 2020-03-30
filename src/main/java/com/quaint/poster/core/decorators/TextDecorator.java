@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * 绘制文本
+ * 文本装饰
  *
  * @author quaint
  * @date 21 February 2020

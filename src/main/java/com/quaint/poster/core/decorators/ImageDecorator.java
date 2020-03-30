@@ -11,7 +11,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 
 /**
- * 绘制 图片
+ * 图片装饰
  * @author quaint
  * @date 21 February 2020
  * @since 1.0

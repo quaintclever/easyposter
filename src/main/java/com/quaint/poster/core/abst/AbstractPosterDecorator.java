@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
+ * 海报装饰器抽象.
  * @author quaint
  * @date 21 February 2020
  * @since 1.0
