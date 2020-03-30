@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 绘制海报本地测试
  * @author quaint
  * @date 21 February 2020
- * @since 1.34
+ * @since 1.0
  */
 public class PosterTest {
 

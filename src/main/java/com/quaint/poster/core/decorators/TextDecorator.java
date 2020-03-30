@@ -15,7 +15,7 @@ import java.awt.image.BufferedImage;
  *
  * @author quaint
  * @date 21 February 2020
- * @since 1.34
+ * @since 1.0
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

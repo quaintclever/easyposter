@@ -13,7 +13,7 @@ import java.util.List;
  * 朋友圈海报
  * @author quaint
  * @date 21 February 2020
- * @since 1.34
+ * @since 1.0
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
