@@ -54,7 +54,7 @@ public class TextDecorator extends AbstractPosterDecorator {
     /**
      * 是否根据 width 换行, 配合 width 使用
      */
-    private boolean newLine = false;
+    private boolean canNewLine = false;
 
     /**
      * 换行限制次数
@@ -67,7 +67,7 @@ public class TextDecorator extends AbstractPosterDecorator {
     }
 
     @Builder(toBuilder = true)
-    public TextDecorator(Poster poster, int positionX, int positionY, int width, int height, Font font, int fontSize, Color color, String content, int fontStyle, boolean delLine, boolean newLine, int newLineLimit) {
+    public TextDecorator(Poster poster, int positionX, int positionY, int width, int height, Font font, int fontSize, Color color, String content, int fontStyle, boolean delLine, boolean canNewLine, int newLineLimit) {
         super(poster, positionX, positionY, width, height);
         this.font = font;
         this.fontSize = fontSize;
@@ -75,7 +75,7 @@ public class TextDecorator extends AbstractPosterDecorator {
         this.content = content;
         this.fontStyle = fontStyle;
         this.delLine = delLine;
-        this.newLine = newLine;
+        this.canNewLine = canNewLine;
         this.newLineLimit = newLineLimit;
     }
 
@@ -108,8 +108,8 @@ public class TextDecorator extends AbstractPosterDecorator {
         g.setColor(color);
 
         FontMetrics fm = FontDesignMetrics.getMetrics(font);
-        // 换行
-        if (newLine && width > fontSize) {
+        // 换行 并且 设置的换行宽度大于一个字的大小才可以换行
+        if (canNewLine && width > fontSize) {
             //【商品名称换行判断逻辑】
             // 换行修正最后一个文字越界.
             width = width - fontSize/2;
@@ -145,7 +145,7 @@ public class TextDecorator extends AbstractPosterDecorator {
         }
 
         // 删除线暂时不支持换行
-        if (delLine && !newLine) {
+        if (delLine && !canNewLine) {
             // 删除线长度
             int delLineW = fm.stringWidth(content);
             g.drawLine(positionX, positionY + 3 * fontSize / 5, positionX + delLineW, positionY + 3 * fontSize / 5);

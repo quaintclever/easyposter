@@ -3,8 +3,6 @@ package com.quaint.poster.core.abst;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.awt.image.BufferedImage;
-
 /**
  * @author quaint
  * @date 21 February 2020
@@ -14,6 +12,9 @@ import java.awt.image.BufferedImage;
 @AllArgsConstructor
 public abstract class AbstractPosterDecorator implements Poster {
 
+    /**
+     * 海报对象
+     */
     protected Poster poster;
 
     protected int positionX;
@@ -26,11 +27,5 @@ public abstract class AbstractPosterDecorator implements Poster {
 
     public AbstractPosterDecorator(Poster poster){
         this.poster = poster;
-    }
-
-    @Override
-    public BufferedImage draw(BufferedImage image) {
-        System.out.println("默认绘制方法");
-        return poster.draw(image);
     }
 }

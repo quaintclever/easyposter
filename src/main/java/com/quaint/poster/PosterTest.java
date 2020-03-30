@@ -114,7 +114,7 @@ public class PosterTest {
                 .fontSize(30)
                 .fontStyle(Font.BOLD)
                 .content(playbill.getSlogan())
-                .newLine(true).width(advLineWidth)
+                .canNewLine(true).width(advLineWidth)
                 .color(new Color(76, 76, 76)).build();
         fm = FontDesignMetrics.getMetrics(drawSlogan.getFont().deriveFont(drawSlogan.getFontStyle(), drawSlogan.getFontSize()));
         int x = fm.stringWidth(playbill.getSlogan());
@@ -129,8 +129,9 @@ public class PosterTest {
                 .images(playbill.getProdImages()).build();
         // 6. 绘制二维码
         ImageDecorator drawQrcode;
+
         // ======= 插入活动相关绘制开始 =======
-        int activityAdd = 0;
+        int activityAdd;
         // 绘制多少人
         List<String> contentTip = new ArrayList<>();
         contentTip.add("限量"+playbill.getSalesQuantity().toString()+"件");
@@ -157,7 +158,7 @@ public class PosterTest {
                     .positionX(43).positionY(1038 + addHeight + lineFix + activityAdd)
                     .fontSize(30).fontStyle(Font.BOLD)
                     .content(playbill.getProdName())
-                    .newLine(true).width(467)
+                    .canNewLine(true).width(467)
                     .color(new Color(102, 102, 102)).build();
 
         // 8. 绘制价格区间
