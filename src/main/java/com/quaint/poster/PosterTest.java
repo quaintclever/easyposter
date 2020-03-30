@@ -1,7 +1,9 @@
 package com.quaint.poster;
 
 import com.quaint.poster.content.FriendCirclePoster;
+import com.quaint.poster.content.SamplePoster;
 import com.quaint.poster.core.decorators.*;
+import com.quaint.poster.core.impl.PosterDefaultImpl;
 import org.springframework.core.io.ClassPathResource;
 import sun.font.FontDesignMetrics;
 
@@ -23,6 +25,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class PosterTest {
 
     public static void main(String[] args) throws Exception{
+
+        // 测试注解
+//        SamplePoster poster = SamplePoster.builder().slogan("slogan").build();
+//        PosterDefaultImpl<SamplePoster> impl = new PosterDefaultImpl<>();
+//        impl.annotationDrawPoster(poster);
 
         // 创建海报测试
         createPlaybillTest();
