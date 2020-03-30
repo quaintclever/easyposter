@@ -48,9 +48,9 @@ public class PosterTest {
                 .qrcode(qrcode)
                 .logo(qrcode)
                 .shopName("Quaint小白")
-                .salesQuantity(100).limitQuantity(10)
+                .salesQuantity(0).limitQuantity(0)
                 .userNickName("quaint easyposter")
-                .prodName("quaint easyposter 海报绘制")
+                .prodName("github quaintclever easyposter 海报绘制")
                 .priceRange("￥00.00~00.00")
                 .linePrice("零售价:￥00.00")
                 .slogan("命运多舛，痴迷淡然。挥别了青春，数不尽的车站。甘于平凡，却不甘平凡地溃败。").build();
@@ -134,8 +134,10 @@ public class PosterTest {
         int activityAdd;
         // 绘制多少人
         List<String> contentTip = new ArrayList<>();
-        contentTip.add("限量"+playbill.getSalesQuantity().toString()+"件");
-        contentTip.add("每人限购"+playbill.getLimitQuantity().toString()+"件");
+        contentTip.add("Star数量:"+playbill.getSalesQuantity().toString());
+        contentTip.add("投币");
+        contentTip.add("Fork数量:"+playbill.getLimitQuantity().toString());
+        contentTip.add("许愿");
         BufferedImage tipBg = ImageIO.read(new ClassPathResource("image/tipbg.png").getInputStream());
         LabelTextDecorator drawLabelText = new LabelTextDecorator(drawProdImgs).toBuilder()
                 .positionX(43).positionY(1022 + addHeight + lineFix)
@@ -163,7 +165,7 @@ public class PosterTest {
 
         // 8. 绘制价格区间
         TextDecorator drawPriceRange = new TextDecorator(drawProdName).toBuilder()
-                .positionX(40).positionY(1131 + addHeight + lineFix + activityAdd)
+                .positionX(40).positionY(1127 + addHeight + lineFix + activityAdd)
                 .fontSize(28).fontStyle(Font.BOLD)
                 .content(playbill.getPriceRange())
                 .color(new Color(216, 11, 42)).build();
@@ -173,14 +175,14 @@ public class PosterTest {
         fm = FontDesignMetrics.getMetrics(drawPriceRange.getFont().deriveFont(drawPriceRange.getFontStyle(), drawPriceRange.getFontSize()));
         x = fm.stringWidth(playbill.getPriceRange());
         TextDecorator drawLinePrice = new TextDecorator(drawPriceRange).toBuilder()
-                .positionX(40 + x + 18).positionY(1131 + addHeight + lineFix + activityAdd)
+                .positionX(40 + x + 18).positionY(1127 + addHeight + lineFix + activityAdd)
                 .fontSize(28)
                 .content(playbill.getLinePrice())
                 .delLine(true)
                 .color(new Color(153, 153, 153)).build();
         // 10. 绘制 长按识别二维码
         TextDecorator drawIdentifyQrcode = new TextDecorator(drawLinePrice).toBuilder()
-                .positionX(571).positionY(1153 + addHeight + lineFix + activityAdd)
+                .positionX(567).positionY(1153 + addHeight + lineFix + activityAdd)
                 .fontSize(16)
                 .content("长按识别二维码")
                 .color(new Color(153, 153, 153)).build();
