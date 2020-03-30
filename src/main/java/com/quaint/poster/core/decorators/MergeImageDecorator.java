@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class MergeImgDecorator extends AbstractPosterDecorator {
+public class MergeImageDecorator extends AbstractPosterDecorator {
 
     /**
      * 要绘制的图片
@@ -31,12 +31,12 @@ public class MergeImgDecorator extends AbstractPosterDecorator {
      */
     private int nextAddHeight;
 
-    public MergeImgDecorator(Poster poster) {
+    public MergeImageDecorator(Poster poster) {
         super(poster);
     }
 
     @Builder(toBuilder = true)
-    public MergeImgDecorator(Poster poster, int positionX, int positionY, int width, int height, List<BufferedImage> images) {
+    public MergeImageDecorator(Poster poster, int positionX, int positionY, int width, int height, List<BufferedImage> images) {
         super(poster,positionX,positionY,width,height);
         this.images = images;
     }

@@ -107,16 +107,10 @@ public class TextDecorator extends AbstractPosterDecorator {
         g.setFont(font);
         g.setColor(color);
 
-        // 计算非汉字长度
-        int shortNum = content.replaceAll("[^0-9,a-z,A-Z,.]", "").length();
-        // 汉字长度
-        int longNum = content.length() - shortNum;
-        // 删除线长度 = (汉字长度 * size) + ((字符长度+1) * size/2)
-        int num = longNum + (shortNum + 1) / 2;
+        FontMetrics fm = FontDesignMetrics.getMetrics(font);
         // 换行
         if (newLine && width > fontSize) {
             //【商品名称换行判断逻辑】
-            FontMetrics fm = FontDesignMetrics.getMetrics(font);
             // 换行修正最后一个文字越界.
             width = width - fontSize/2;
 
@@ -152,7 +146,9 @@ public class TextDecorator extends AbstractPosterDecorator {
 
         // 删除线暂时不支持换行
         if (delLine && !newLine) {
-            g.drawLine(positionX - fontSize / 3, positionY + 3 * fontSize / 5, positionX + fontSize * num, positionY + 3 * fontSize / 5);
+            // 删除线长度
+            int delLineW = fm.stringWidth(content);
+            g.drawLine(positionX, positionY + 3 * fontSize / 5, positionX + delLineW, positionY + 3 * fontSize / 5);
         }
 
         g.dispose();

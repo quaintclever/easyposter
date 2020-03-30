@@ -123,7 +123,7 @@ public class PosterTest {
             lineFix = -39;
         }
         // 5. 合并商品图片
-        MergeImgDecorator drawProdImgs = new MergeImgDecorator(drawSlogan).toBuilder()
+        MergeImageDecorator drawProdImgs = new MergeImageDecorator(drawSlogan).toBuilder()
                 .positionX(47).positionY(350 + lineFix)
                 .width(654).height(654)
                 .images(playbill.getProdImages()).build();
