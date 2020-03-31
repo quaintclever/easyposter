@@ -49,7 +49,7 @@ public class BackgroundDecorator extends AbstractPosterDecorator {
     private BufferedImage drawBackground(BufferedImage image){
 
         // 如果宽度没变化, 或者没设置
-        if (width == 0 && height == 0){
+        if (width == 0 || height == 0){
             return image;
         }
         // 调整背景宽度

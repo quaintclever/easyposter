@@ -8,6 +8,7 @@ import com.quaint.poster.core.decorators.BackgroundDecorator;
 import com.quaint.poster.core.decorators.ImageDecorator;
 import com.quaint.poster.core.decorators.TextDecorator;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Field;
 
@@ -29,13 +30,17 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
 
             // 最后需要执行绘制方法的类
             Poster finalDraw;
+            PosterBackground ann = fields[0].getAnnotation(PosterBackground.class);
 
             fields[0].setAccessible(true);
             Object o = fields[0].get(content);
             if (o instanceof BufferedImage){
                 BufferedImage bg = (BufferedImage) o;
                 finalDraw = new BackgroundDecorator().toBuilder()
-                        .bgImage(bg).build();
+                        .bgImage(bg)
+                        .width(ann.width())
+                        .height(ann.height())
+                        .build();
             } else {
                 throw new RuntimeException("背景注解标记的类型需要为BufferedImage, 并且不可为空.");
             }
@@ -84,7 +89,13 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
         System.out.println(ann);
 
         return new TextDecorator(base).toBuilder()
+                .positionX(ann.position()[0])
+                .positionY(ann.position()[1])
                 .fontSize(ann.size())
+                .canNewLine(ann.canNewLine()[0]==1)
+                .width(ann.canNewLine()[1])
+                .newLineLimit(ann.canNewLine()[2])
+                .color(new Color(ann.color()[0],ann.color()[1],ann.color()[2]))
                 .content(text)
                 .build();
     }
@@ -107,6 +118,8 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
         System.out.println(ann);
 
         return new ImageDecorator(base).toBuilder()
+                .positionX(ann.position()[0])
+                .positionY(ann.position()[1])
                 .width(ann.width())
                 .height(ann.height())
                 .circle(ann.circle())

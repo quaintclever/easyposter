@@ -27,16 +27,18 @@ public class PosterTest {
     public static void main(String[] args) throws Exception{
 
         // 测试注解
-        BufferedImage whiteBackground = ImageIO.read(new ClassPathResource("image/whitebackground.jpg").getInputStream());
-        BufferedImage qrcode = ImageIO.read(new ClassPathResource("image/headimage.jpg").getInputStream());
+        BufferedImage background = ImageIO.read(new ClassPathResource("image/yayi.png").getInputStream());
+        BufferedImage head = ImageIO.read(new ClassPathResource("image/headimage.jpg").getInputStream());
         SamplePoster poster = SamplePoster.builder()
-                .slogan("slogan")
-                .backgroundImage(whiteBackground)
-                .mainImage(qrcode)
+                .backgroundImage(background)
+                .head(head)
+                .nickName("Quaint")
+                .slogan("命运多舛，痴迷淡然。挥别了青春，数不尽的车站。甘于平凡，却不甘平凡地溃败。")
+                .mainImage(head)
                 .build();
         PosterDefaultImpl<SamplePoster> impl = new PosterDefaultImpl<>();
         BufferedImage test = impl.annotationDrawPoster(poster).draw(null);
-        ImageIO.write(test,"png",new FileOutputStream("test.png"));
+        ImageIO.write(test,"png",new FileOutputStream("annTest.png"));
 
         // 创建海报测试
 //        createPlaybillTest();

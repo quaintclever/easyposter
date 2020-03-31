@@ -27,12 +27,20 @@ public @interface PosterFontCss {
     int size() default 18;
 
     /**
-     * 颜色
+     * 颜色 默认黑色
      */
     int[] color() default {0,0,0};
 
     /**
-     * 优先级  设置该属性时 position x 失效
+     * 是否可以换行
+     * 第一个参数 0 false 1 true
+     * 第二个参数 换行的限制宽度, 如果小于字体宽度 则不会换行
+     * 第三个参数 换行次数
+     */
+    int[] canNewLine() default {0,0,1};
+
+    /**
+     * 优先级  设置该属性时 position x 失效 (暂未实现)
      * center > right > left
      */
     boolean center() default false;

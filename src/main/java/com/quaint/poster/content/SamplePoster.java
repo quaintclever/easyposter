@@ -24,32 +24,32 @@ public class SamplePoster extends AbstractDefaultPoster {
     /**
      * 背景图
      */
-    @PosterBackground
-    protected BufferedImage backgroundImage;
+    @PosterBackground(width = 666,height = 365)
+    private BufferedImage backgroundImage;
 
     /**
-     * logo
+     * 头像
      */
-    @PosterImageCss(position = {10,10},width = 50, height = 50, circle = true)
-    protected BufferedImage logo;
+    @PosterImageCss(position = {27,27},width = 36, height = 36, circle = true)
+    private BufferedImage head;
+
+    /**
+     * 昵称
+     */
+    @PosterFontCss(position = {71,32}, color = {255,255,255})
+    private String nickName;
 
     /**
      * 广告语
      */
-    @PosterFontCss(position = {2,2},center = true, size = 12, color = {1,1,1})
-    protected String slogan;
+    @PosterFontCss(position = {27,70},center = true, size = 22, color = {255,255,255}, canNewLine={1,221,7})
+    private String slogan;
 
     /**
      * 主图
      */
-    @PosterImageCss(position = {10,10},width = 100,height = 100)
-    protected BufferedImage mainImage;
-
-    /**
-     * 二维码
-     */
-    @PosterImageCss(position = {100,100},width = 60,height = 60)
-    protected BufferedImage qrcode;
+    @PosterImageCss(position = {27,172},width = 168,height = 168)
+    private BufferedImage mainImage;
 
     @Tolerate
     public SamplePoster() {}
