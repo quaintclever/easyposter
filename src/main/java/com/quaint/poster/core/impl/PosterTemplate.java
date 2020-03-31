@@ -4,7 +4,7 @@ import com.quaint.poster.core.abst.Poster;
 
 /**
  * @author quaint
- * @date 30 March 2020
+ *  30 March 2020
  * @since 1.0
  */
 public interface PosterTemplate<E> {

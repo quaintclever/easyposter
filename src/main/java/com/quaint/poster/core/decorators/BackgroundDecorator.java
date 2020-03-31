@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 /**
  * 背景 (绘制的模板,无需成为别人的装饰)
  * @author quaint
- * @date 21 February 2020
+ *  21 February 2020
  * @since 1.0
  */
 @EqualsAndHashCode(callSuper = true)

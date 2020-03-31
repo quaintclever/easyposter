@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  * 完全自定义属性, 可以直接 继承 空白 AbstractDefaultPoster
  * 或实现Poster 接口
  * @author quaint
- * @date 21 February 2020
+ *  21 February 2020
  * @since 1.0
  */
 @Data

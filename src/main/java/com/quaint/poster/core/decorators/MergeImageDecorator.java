@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 多个图片上下合并 装饰器
  * @author quaint
- * @date 21 February 2020
+ *  21 February 2020
  * @since 1.0
  */
 @EqualsAndHashCode(callSuper = true)

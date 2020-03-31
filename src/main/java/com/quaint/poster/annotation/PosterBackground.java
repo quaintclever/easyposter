@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  *
  * @author quaint
- * @date 30 March 2020
+ *  30 March 2020
  * @since 1.0
  */
 @Target(ElementType.FIELD)

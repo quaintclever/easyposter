@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  *
  * @author quaint
- * @date 30 March 2020
+ *  30 March 2020
  * @since 1.0
  */
 @Target(ElementType.FIELD)
@@ -41,7 +41,7 @@ public @interface PosterFontCss {
 
     /**
      * 优先级  设置该属性时 position x 失效 (暂未实现)
-     * center > right > left
+     * center right  left
      */
     boolean center() default false;
 

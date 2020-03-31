@@ -14,7 +14,7 @@ import java.lang.reflect.Field;
 
 /**
  * @author quaint
- * @date 30 March 2020
+ *  30 March 2020
  * @since 1.0
  */
 public class PosterDefaultImpl<E> implements PosterTemplate<E> {
