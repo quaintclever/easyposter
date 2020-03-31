@@ -107,6 +107,7 @@ public class PosterTest {
         TextDecorator shopName = new TextDecorator(drawLogo).toBuilder()
                 .positionX(shopNameLeft).positionY(32)
                 .content(playbill.getShopName())
+                .color(new Color(255,255,255))
                 .fontStyle(Font.BOLD)
                 .fontSize(36).build();
         // 2. 绘制头像

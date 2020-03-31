@@ -39,7 +39,7 @@ public class TextDecorator extends AbstractPosterDecorator {
     /**
      * 字体颜色
      */
-    private Color color = new Color(255, 255, 255);
+    private Color color = new Color(0, 0, 0);
 
     /**
      * 内容
