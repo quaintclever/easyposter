@@ -27,12 +27,19 @@ public class PosterTest {
     public static void main(String[] args) throws Exception{
 
         // 测试注解
-//        SamplePoster poster = SamplePoster.builder().slogan("slogan").build();
-//        PosterDefaultImpl<SamplePoster> impl = new PosterDefaultImpl<>();
-//        impl.annotationDrawPoster(poster);
+        BufferedImage whiteBackground = ImageIO.read(new ClassPathResource("image/whitebackground.jpg").getInputStream());
+        BufferedImage qrcode = ImageIO.read(new ClassPathResource("image/headimage.jpg").getInputStream());
+        SamplePoster poster = SamplePoster.builder()
+                .slogan("slogan")
+                .backgroundImage(whiteBackground)
+                .mainImage(qrcode)
+                .build();
+        PosterDefaultImpl<SamplePoster> impl = new PosterDefaultImpl<>();
+        BufferedImage test = impl.annotationDrawPoster(poster).draw(null);
+        ImageIO.write(test,"png",new FileOutputStream("test.png"));
 
         // 创建海报测试
-        createPlaybillTest();
+//        createPlaybillTest();
     }
 
     /**
@@ -55,13 +62,13 @@ public class PosterTest {
                 .qrcode(qrcode)
                 .logo(qrcode)
                 .shopName("Quaint小白")
-                .salesQuantity(0).limitQuantity(0)
+                .salesQuantity(3).limitQuantity(1)
                 .userNickName("quaint easyposter")
                 .prodName("github quaintclever easyposter 海报绘制")
                 .priceRange("￥00.00~00.00")
                 .linePrice("零售价:￥00.00")
                 .slogan("命运多舛，痴迷淡然。挥别了青春，数不尽的车站。甘于平凡，却不甘平凡地溃败。").build();
-        playbill.setBackgroundImage(whiteBackground);
+//        playbill.setBackgroundImage(whiteBackground);
 
 
         // 设置海报属性
@@ -76,8 +83,8 @@ public class PosterTest {
         int addHeight = bgHeight.get() - 1229;
 
         // 1. 绘制背景 + logo
-        BackgroundDecorator drawBg = new BackgroundDecorator(playbill).toBuilder()
-                .width(750)
+        BackgroundDecorator drawBg = new BackgroundDecorator().toBuilder()
+                .width(750).bgImage(whiteBackground)
                 .height(bgHeight.get()).build();
         ImageDecorator drawBgLogo = new ImageDecorator(drawBg).toBuilder()
                 .width(750).height(120)
@@ -195,7 +202,7 @@ public class PosterTest {
                 .color(new Color(153, 153, 153)).build();
 
         // 调用最后一个包装类的 draw 方法
-        BufferedImage drawResult = drawIdentifyQrcode.draw(playbill.getBackgroundImage());
+        BufferedImage drawResult = drawIdentifyQrcode.draw(null);
         // 本地测试效果
         ImageIO.write(drawResult,"png",new FileOutputStream("drawFriendTest.png"));
 

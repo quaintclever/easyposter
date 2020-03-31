@@ -1,6 +1,6 @@
 package com.quaint.poster.core.impl;
 
-import java.awt.image.BufferedImage;
+import com.quaint.poster.core.abst.Poster;
 
 /**
  * @author quaint
@@ -13,7 +13,8 @@ public interface PosterTemplate<E> {
      * 基于注解的绘制
      * @param content content 类
      * @return 注解绘制
+     * @throws IllegalAccessException ex
      */
-    BufferedImage annotationDrawPoster(E content);
+    Poster annotationDrawPoster(E content) throws IllegalAccessException;
 
 }

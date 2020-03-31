@@ -1,8 +1,15 @@
 package com.quaint.poster.core.impl;
 
+import com.quaint.poster.annotation.PosterBackground;
+import com.quaint.poster.annotation.PosterFontCss;
+import com.quaint.poster.annotation.PosterImageCss;
+import com.quaint.poster.core.abst.Poster;
+import com.quaint.poster.core.decorators.BackgroundDecorator;
+import com.quaint.poster.core.decorators.ImageDecorator;
+import com.quaint.poster.core.decorators.TextDecorator;
+
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 /**
  * @author quaint
@@ -13,29 +20,98 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
 
 
     @Override
-    public BufferedImage annotationDrawPoster(E content) {
+    public Poster annotationDrawPoster(E content) throws IllegalAccessException{
         // 反射获取所有属性
         Field[] fields = content.getClass().getDeclaredFields();
 
-        Arrays.stream(fields).forEach(field -> {
-            field.setAccessible(true);
-            //获取属性
-            String name = field.getName();
-            //获取属性值
-            try {
+        // 第一个注解为背景配置
+        if (fields.length>0 && fields[0].getAnnotation(PosterBackground.class) != null){
+
+            // 最后需要执行绘制方法的类
+            Poster finalDraw;
+
+            fields[0].setAccessible(true);
+            Object o = fields[0].get(content);
+            if (o instanceof BufferedImage){
+                BufferedImage bg = (BufferedImage) o;
+                finalDraw = new BackgroundDecorator().toBuilder()
+                        .bgImage(bg).build();
+            } else {
+                throw new RuntimeException("背景注解标记的类型需要为BufferedImage, 并且不可为空.");
+            }
+
+            // 给背景绘制基本属性
+            for (Field field: fields) {
+                field.setAccessible(true);
+                //获取属性
+                String name = field.getName();
+                System.out.println("field: " + name + "-->开始绘制");
+                //获取属性值
                 Object value = field.get(content);
                 if (value instanceof String){
-                    System.out.println("value: " + value);
-                } else {
-                    System.out.println("value: " + value);
+                    String str = (String)value;
+                    PosterFontCss posterFontCss = field.getAnnotation(PosterFontCss.class);
+                    finalDraw = drawTextImpl(finalDraw,str,posterFontCss);
+                } else if (value instanceof BufferedImage){
+                    BufferedImage image = (BufferedImage) value;
+                    PosterImageCss posterImageCss = field.getAnnotation(PosterImageCss.class);
+                    finalDraw = drawImageImpl(finalDraw,image,posterImageCss);
                 }
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-            System.out.println("name: " + name);
 
-        });
-        return null;
+            }
+            return finalDraw;
+        } else {
+            throw new RuntimeException("绘制字段为空,或者第一个属性不是背景,并且没有标记背景注解");
+        }
+
+    }
+
+    /**
+     * 绘制文本装饰器
+     * @param base 基础图片
+     * @param text 要绘制的文本
+     * @return poster
+     */
+    private Poster drawTextImpl(Poster base, String text, PosterFontCss ann){
+
+        if (ann==null){
+            return base;
+        }
+
+        System.out.println("【 ===> drawTextImpl <=== 】method start: ");
+        System.out.println(base!=null);
+        System.out.println(text);
+        System.out.println(ann);
+
+        return new TextDecorator(base).toBuilder()
+                .fontSize(ann.size())
+                .content(text)
+                .build();
+    }
+
+    /**
+     * 绘制图片装饰器
+     * @param base 基础图片
+     * @param image 要绘制的图片
+     * @return poster
+     */
+    private Poster drawImageImpl(Poster base, BufferedImage image, PosterImageCss ann){
+
+        if (ann == null){
+            return base;
+        }
+
+        System.out.println("【 ===> drawImageImpl <=== 】method start: ");
+        System.out.println(base!=null);
+        System.out.println(image!=null);
+        System.out.println(ann);
+
+        return new ImageDecorator(base).toBuilder()
+                .width(ann.width())
+                .height(ann.height())
+                .circle(ann.circle())
+                .image(image)
+                .build();
     }
 
 

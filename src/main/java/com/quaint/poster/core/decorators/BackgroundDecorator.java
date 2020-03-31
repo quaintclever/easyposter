@@ -3,34 +3,42 @@ package com.quaint.poster.core.decorators;
 import com.quaint.poster.core.abst.AbstractPosterDecorator;
 import com.quaint.poster.core.abst.Poster;
 import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * 背景装饰
+ * 背景 (绘制的模板,无需成为别人的装饰)
  * @author quaint
  * @date 21 February 2020
  * @since 1.0
  */
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class BackgroundDecorator extends AbstractPosterDecorator {
 
-    public BackgroundDecorator(Poster poster) {
-        super(poster);
+    /**
+     * 背景图
+     */
+    private BufferedImage bgImage;
+
+    public BackgroundDecorator() {
+        super(null);
     }
 
     @Builder(toBuilder = true)
-    public BackgroundDecorator(Poster poster, int positionX, int positionY, int width, int height) {
+    public BackgroundDecorator(Poster poster, int positionX, int positionY, int width, int height, BufferedImage bgImage) {
         super(poster,positionX,positionY,width,height);
+        this.bgImage = bgImage;
     }
 
 
     @Override
     public BufferedImage draw(BufferedImage image) {
-        // 绘制 被装饰之前的 图片
-        BufferedImage draw = poster.draw(image);
-        // 装饰, 绘制头像
-        return drawBackground(draw);
+        // 装饰, 绘制背景
+        return drawBackground(bgImage);
     }
 
     /**

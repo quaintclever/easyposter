@@ -30,7 +30,7 @@ public class SamplePoster extends AbstractDefaultPoster {
     /**
      * logo
      */
-    @PosterImageCss(position = {1,1},width = 88, height = 88, circle = true)
+    @PosterImageCss(position = {10,10},width = 50, height = 50, circle = true)
     protected BufferedImage logo;
 
     /**
@@ -42,13 +42,13 @@ public class SamplePoster extends AbstractDefaultPoster {
     /**
      * 主图
      */
-    @PosterImageCss(position = {10,10})
+    @PosterImageCss(position = {10,10},width = 100,height = 100)
     protected BufferedImage mainImage;
 
     /**
      * 二维码
      */
-    @PosterImageCss(position = {100,100})
+    @PosterImageCss(position = {100,100},width = 60,height = 60)
     protected BufferedImage qrcode;
 
     @Tolerate
