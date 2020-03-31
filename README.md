@@ -24,7 +24,89 @@
 - 自定义海报请按照content目录下的类对自身业务兼容
 - 如果装饰器不满足你的需求, 请对decorators扩展
 - 绘制请让设计给出类似蓝湖的像素图, 仿照PosterTest按着填一下就ok
+- 现在有简单的注解支持了
 
+## 注解支持
+
+**海报定义类**
+
+```java
+/**
+ * @author quaint
+ * @date 30 March 2020
+ * @since 1.0
+ */
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Builder
+public class SamplePoster extends AbstractDefaultPoster {
+
+    /**
+     * 背景图
+     */
+    @PosterBackground(width = 666,height = 365)
+    private BufferedImage backgroundImage;
+
+    /**
+     * 头像
+     */
+    @PosterImageCss(position = {27,27},width = 36, height = 36, circle = true)
+    private BufferedImage head;
+
+    /**
+     * 昵称
+     */
+    @PosterFontCss(position = {71,32}, color = {255,255,255})
+    private String nickName;
+
+    /**
+     * 广告语
+     */
+    @PosterFontCss(position = {27,70},center = true, size = 22, color = {255,255,255}, canNewLine={1,221,7})
+    private String slogan;
+
+    /**
+     * 主图
+     */
+    @PosterImageCss(position = {27,172},width = 168,height = 168)
+    private BufferedImage mainImage;
+
+    @Tolerate
+    public SamplePoster() {}
+}
+
+```
+
+**海报绘制**
+
+```java
+/**
+ * 绘制海报本地测试
+ * @author quaint
+ * @date 21 February 2020
+ * @since 1.0
+ */
+public class PosterTest {
+
+    public static void main(String[] args) throws Exception{
+
+        // 测试注解
+        BufferedImage background = ImageIO.read(new ClassPathResource("image/yayi.png").getInputStream());
+        BufferedImage head = ImageIO.read(new ClassPathResource("image/headimage.jpg").getInputStream());
+        SamplePoster poster = SamplePoster.builder()
+                .backgroundImage(background)
+                .head(head)
+                .nickName("Quaint")
+                .slogan("命运多舛，痴迷淡然。挥别了青春，数不尽的车站。甘于平凡，却不甘平凡地溃败。")
+                .mainImage(head)
+                .build();
+        PosterDefaultImpl<SamplePoster> impl = new PosterDefaultImpl<>();
+        BufferedImage test = impl.annotationDrawPoster(poster).draw(null);
+        ImageIO.write(test,"png",new FileOutputStream("annTest.png"));
+
+    }
+}
+```
 
 
 ## 效果展示
