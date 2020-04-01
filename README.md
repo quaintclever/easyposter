@@ -24,12 +24,13 @@
 
 ## 快速上手
 
-- 项目仅引入了lombok简化代码
-- 看效果请直接运行 PosterTest
-- 自定义海报请按照content目录下的类对自身业务兼容
+- demo分支可以更好的帮助你理解使用方式
+- 看效果请直接运行demo分支里的 PosterTest
+- 自定义海报请按照demo分支下的content目录下的类对自身业务兼容
 - 如果装饰器不满足你的需求, 请对decorators扩展
 - 绘制请让设计给出类似蓝湖的像素图, 仿照PosterTest按着填一下就ok
-- 现在有简单的注解支持了(请看下面的注解支持)
+- 有简单的注解支持
+- 项目仅引入了lombok简化代码（1.0 版本包含有spring core）
 
 ```xml
 <dependency>
