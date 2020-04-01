@@ -24,7 +24,7 @@
 
 ## 快速上手
 
-- 项目仅引入了lombok 和 spring-core(用于读取resources下的图片)
+- 项目仅引入了lombok简化代码
 - 看效果请直接运行 PosterTest
 - 自定义海报请按照content目录下的类对自身业务兼容
 - 如果装饰器不满足你的需求, 请对decorators扩展
