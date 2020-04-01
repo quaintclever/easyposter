@@ -77,16 +77,11 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
      * @param text 要绘制的文本
      * @return poster
      */
-    private Poster drawTextImpl(Poster base, String text, PosterFontCss ann){
+    protected Poster drawTextImpl(Poster base, String text, PosterFontCss ann){
 
         if (ann==null){
             return base;
         }
-
-        System.out.println("【 ===> drawTextImpl <=== 】method start: ");
-        System.out.println(base!=null);
-        System.out.println(text);
-        System.out.println(ann);
 
         return new TextDecorator(base).toBuilder()
                 .positionX(ann.position()[0])
@@ -106,16 +101,11 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
      * @param image 要绘制的图片
      * @return poster
      */
-    private Poster drawImageImpl(Poster base, BufferedImage image, PosterImageCss ann){
+    protected Poster drawImageImpl(Poster base, BufferedImage image, PosterImageCss ann){
 
         if (ann == null){
             return base;
         }
-
-        System.out.println("【 ===> drawImageImpl <=== 】method start: ");
-        System.out.println(base!=null);
-        System.out.println(image!=null);
-        System.out.println(ann);
 
         return new ImageDecorator(base).toBuilder()
                 .positionX(ann.position()[0])

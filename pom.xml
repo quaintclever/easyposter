@@ -22,13 +22,13 @@
 
     <scm>
         <url>https://github.com/quaintclever/easyposter</url>
-        <connection>scm:https://github.com/quaintclever/easyposter.git</connection>
+        <connection>scm:git@github.com:quaintclever/easyposter.git</connection>
+        <developerConnection>scm:git@github.com:quaintclever/easyposter.git</developerConnection>
     </scm>
 
     <developers>
         <developer>
-            <id>quaint</id>
-            <name>quaint</name>
+            <name>Quaint</name>
             <email>857776215@qq.com</email>
         </developer>
     </developers>
@@ -63,17 +63,6 @@
 
     </dependencies>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
-
     <build>
         <plugins>
             <plugin>
@@ -92,37 +81,35 @@
             <id>release</id>
             <build>
                 <plugins>
-
+                    <!-- Source -->
                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
                         <version>2.1</version>
-                        <configuration>
-                            <attach>true</attach>
-                        </configuration>
                         <executions>
                             <execution>
-                                <phase>compile</phase>
+                                <phase>package</phase>
                                 <goals>
-                                    <goal>jar</goal>
+                                    <goal>jar-no-fork</goal>
                                 </goals>
                             </execution>
                         </executions>
                     </plugin>
-
+                    <!-- Javadoc -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
                         <version>3.1.0</version>
                         <executions>
                             <execution>
-                                <id>attach-javadocs</id>
+                                <phase>package</phase>
                                 <goals>
                                     <goal>jar</goal>
                                 </goals>
                             </execution>
                         </executions>
                     </plugin>
-
+                    <!-- GPG -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
@@ -136,7 +123,7 @@
                             </execution>
                         </executions>
                     </plugin>
-
+                    <!-- sonatype -->
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -151,6 +138,17 @@
 
                 </plugins>
             </build>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+
         </profile>
     </profiles>
 
