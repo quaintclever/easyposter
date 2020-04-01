@@ -48,9 +48,6 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
             // 给背景绘制基本属性
             for (Field field: fields) {
                 field.setAccessible(true);
-                //获取属性
-                String name = field.getName();
-                System.out.println("field: " + name + "-->开始绘制");
                 //获取属性值
                 Object value = field.get(content);
                 if (value instanceof String){
