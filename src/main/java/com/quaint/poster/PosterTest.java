@@ -70,7 +70,6 @@ public class PosterTest {
                 .priceRange("￥00.00~00.00")
                 .linePrice("零售价:￥00.00")
                 .slogan("命运多舛，痴迷淡然。挥别了青春，数不尽的车站。甘于平凡，却不甘平凡地溃败。").build();
-//        playbill.setBackgroundImage(whiteBackground);
 
 
         // 设置海报属性
