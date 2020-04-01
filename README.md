@@ -103,7 +103,7 @@ public class PosterTest {
 
     public static void main(String[] args) throws Exception{
 
-        // 测试注解, 图片请自行添加到resources下
+        // 测试注解, 图片请自行添加到resources下 ClassPathResource 需要引入spring
         BufferedImage background = ImageIO.read(new ClassPathResource("image/yayi.png").getInputStream());
         BufferedImage head = ImageIO.read(new ClassPathResource("image/headimage.jpg").getInputStream());
         SamplePoster poster = SamplePoster.builder()
