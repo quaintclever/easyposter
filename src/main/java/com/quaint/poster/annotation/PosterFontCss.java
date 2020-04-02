@@ -1,5 +1,6 @@
 package com.quaint.poster.annotation;
 
+import java.awt.*;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -20,6 +21,11 @@ public @interface PosterFontCss {
      * positionX,positionY
      */
     int[] position() default {0,0};
+
+    /**
+     * @return 字体样式
+     */
+    int style() default Font.PLAIN;
 
     /**
      * 字体大小

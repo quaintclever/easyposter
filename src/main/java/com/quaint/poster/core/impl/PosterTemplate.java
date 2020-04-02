@@ -13,8 +13,7 @@ public interface PosterTemplate<E> {
      * 基于注解的绘制
      * @param content content 类
      * @return 注解绘制
-     * @throws IllegalAccessException ex
      */
-    Poster annotationDrawPoster(E content) throws IllegalAccessException;
+    Poster annotationDrawPoster(E content);
 
 }

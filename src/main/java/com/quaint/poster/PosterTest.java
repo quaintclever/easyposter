@@ -6,6 +6,8 @@ import com.quaint.poster.content.SamplePoster;
 import com.quaint.poster.core.abst.Poster;
 import com.quaint.poster.core.decorators.*;
 import com.quaint.poster.core.impl.PosterDefaultImpl;
+import com.quaint.poster.core.impl.PosterDefaultPlusImpl;
+import com.quaint.poster.core.impl.PosterTemplate;
 import org.springframework.core.io.ClassPathResource;
 import sun.font.FontDesignMetrics;
 
@@ -48,7 +50,7 @@ public class PosterTest {
                 .backgroundImage(whiteBackground)
                 .logoBg(redLogoBg)
                 .headImage(head)
-                .prodImages(Arrays.asList(head,head))
+                .prodImage(head)
                 .qrcode(head)
                 .logo(head)
                 .shopName("Quaint小白")
@@ -59,24 +61,53 @@ public class PosterTest {
                 .linePrice("零售价:￥00.00")
                 .slogan("命运多舛，痴迷淡然。挥别了青春，数不尽的车站。甘于平凡，却不甘平凡地溃败。").build();
 
-        PosterDefaultImpl<ComplexPoster> impl = new PosterDefaultImpl<>();
-        Poster drawAnn = impl.annotationDrawPoster(poster);
+        PosterTemplate<ComplexPoster> posterTemplate = new PosterDefaultPlusImpl<>();
+        Poster drawAnn = posterTemplate.annotationDrawPoster(poster);
+
         // 手动绘制 注解不支持的 自定义复杂 代码
+        // 计算店铺名称长度
+        FontMetrics fm = FontDesignMetrics.getMetrics(new Font(null).deriveFont(Font.BOLD,36));
+        int nameWidth = fm.stringWidth(poster.getShopName());
+        // logoMarginLeft = (背景宽度 - logo宽度 - 店铺名称宽度 - logo & shop 间隔) /2
+        int logoMarginLeft = (750- 62 - nameWidth - 30)/2;
+        ImageDecorator drawLogo = new ImageDecorator(drawAnn).toBuilder()
+                .positionX(logoMarginLeft).positionY(15)
+                .width(88).height(88)
+                .circle(true)
+                .image(poster.getLogo()).build();
+        // shopNameLeft = logoMarginLeft + logoWidth + 间隔
+        int shopNameLeft = logoMarginLeft + 62 + 35;
+        TextDecorator drawShopName = new TextDecorator(drawLogo).toBuilder()
+                .positionX(shopNameLeft).positionY(32)
+                .content(poster.getShopName())
+                .color(new Color(255,255,255))
+                .fontStyle(Font.BOLD)
+                .fontSize(36).build();
+
         List<String> contentTip = new ArrayList<>();
         contentTip.add("Star数量:"+poster.getSalesQuantity().toString());
         contentTip.add("投币");
         contentTip.add("Fork数量:"+poster.getLimitQuantity().toString());
         contentTip.add("许愿");
         BufferedImage tipBg = ImageIO.read(new ClassPathResource("image/tipbg.png").getInputStream());
-        LabelTextDecorator drawLabelText = new LabelTextDecorator(drawAnn).toBuilder()
+        LabelTextDecorator drawLabelText = new LabelTextDecorator(drawShopName).toBuilder()
                 .positionX(43).positionY(1022)
                 .tipBg(tipBg).contentList(contentTip)
                 .tipMargin(30)
                 .color(new Color(216, 11, 42))
                 .build();
 
+        // 10. 绘制 长按识别二维码
+        TextDecorator drawIdentifyQrcode = new TextDecorator(drawLabelText).toBuilder()
+                .positionX(567).positionY(1153)
+                .fontSize(16)
+                .content("长按识别二维码")
+                .color(new Color(153, 153, 153)).build();
+
+
+
         // 本地测试
-        BufferedImage draw = drawLabelText.draw(null);
+        BufferedImage draw = drawIdentifyQrcode.draw(null);
         ImageIO.write(draw,"png",new FileOutputStream("complexAnnTest.png"));
 
     }

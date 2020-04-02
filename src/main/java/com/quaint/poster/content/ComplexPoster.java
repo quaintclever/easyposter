@@ -6,8 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,54 +25,52 @@ public class ComplexPoster extends AbstractDefaultPoster {
     /**
      * 背景图
      */
-    @PosterBackground(width = 666,height = 365)
+    @PosterBackground(width = 750,height = 1229)
     private BufferedImage backgroundImage;
 
 
     /**
      * logo背景
      */
-    @PosterImageCss(position = {27,27},width = 36, height = 36, circle = true)
+    @PosterImageCss(width = 750, height = 120)
     private BufferedImage logoBg;
 
     /**
      * logo
      */
-    @PosterImageCss(position = {27,27},width = 36, height = 36, circle = true)
     private BufferedImage logo;
+
+    /**
+     * 店铺名称
+     */
+    private String shopName;
 
     /**
      * 用户头像
      */
-    @PosterImageCss(position = {27,27},width = 36, height = 36, circle = true)
+    @PosterImageCss(position = {43,154},width = 67, height = 67, circle = true)
     private BufferedImage headImage;
 
     /**
      * 用户昵称
      */
-    @PosterFontCss(position = {27,70}, size = 22, color = {255,255,255}, canNewLine={1,221,7})
+    @PosterFontCss(position = {123,167}, size = 28, color = {102, 102, 102})
     private String userNickName;
 
-    /**
-     * 店铺名称
-     */
-    @PosterFontCss(position = {27,70}, size = 22, color = {255,255,255}, canNewLine={1,221,7})
-    private String shopName;
 
     /**
      * 广告语
      */
-    @PosterAutoHeight
-    @PosterFontCss(position = {27,70}, size = 22, color = {255,255,255}, canNewLine={1,221,7})
+    @PosterSignNotice
+    @PosterFontCss(position = {50,244}, size = 30, style = Font.BOLD, color = {76, 76, 76}, canNewLine={1,651,1})
     private String slogan;
 
 
     /**
-     * 商品图 / 主图(多张)
+     * 商品图 / 主图(单张)
      */
-    @PosterAutoHeight
-    @PosterImageCss(position = {27,27},width = 36, height = 36, circle = true)
-    private List<BufferedImage> prodImages;
+    @PosterImageCss(position = {47,350},width = 654, height = 654)
+    private BufferedImage prodImage;
 
     /**
      * 活动销量
@@ -87,30 +85,30 @@ public class ComplexPoster extends AbstractDefaultPoster {
     /**
      * 商品名称
      */
-    @PosterAutoHeight(sign = 1)
+    @PosterSignNotice(sign = "prodNameAdd")
     @PosterSign
-    @PosterFontCss(position = {27,70}, size = 22, color = {255,255,255}, canNewLine={1,221,1})
+    @PosterFontCss(position = {43,1068}, size = 30, style = Font.BOLD, color = {102,102,102}, canNewLine={1,467,1})
     private String prodName;
 
     /**
      * 价格范围
      */
-    @PosterSign(sign = {0,1})
-    @PosterFontCss(position = {27,70}, size = 22, color = {255,255,255}, canNewLine={1,221,1})
+    @PosterSign(sign = {"default","prodNameAdd"})
+    @PosterFontCss(position = {40,1157}, size = 28, style = Font.BOLD, color = {216, 11, 42})
     private String priceRange;
 
     /**
      * 划线价
      */
-    @PosterSign(sign = {0,1})
-    @PosterFontCss(position = {27,70}, size = 22, color = {255,255,255}, canNewLine={1,221,1})
+    @PosterSign(sign = {"default","prodNameAdd"})
+    @PosterFontCss(position = {40+200+18,1157}, size = 22, color = {153,153,153},hasDelLine = true)
     private String linePrice;
 
     /**
      * 二维码
      */
     @PosterSign
-    @PosterImageCss(position = {27,27},width = 36, height = 36, circle = true)
+    @PosterImageCss(position = {558,1020},width = 133, height = 133)
     private BufferedImage qrcode;
 
     /**

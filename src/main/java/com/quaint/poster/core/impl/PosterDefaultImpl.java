@@ -21,7 +21,7 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
 
 
     @Override
-    public Poster annotationDrawPoster(E content) throws IllegalAccessException{
+    public Poster annotationDrawPoster(E content){
         // 反射获取所有属性
         Field[] fields = content.getClass().getDeclaredFields();
 
@@ -33,7 +33,13 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
             PosterBackground ann = fields[0].getAnnotation(PosterBackground.class);
 
             fields[0].setAccessible(true);
-            Object o = fields[0].get(content);
+            Object o;
+            try {
+                o = fields[0].get(content);
+            } catch (IllegalArgumentException | IllegalAccessException e) {
+                throw new RuntimeException("反射获取属性异常");
+            }
+
             if (o instanceof BufferedImage){
                 BufferedImage bg = (BufferedImage) o;
                 finalDraw = new BackgroundDecorator().toBuilder()
@@ -44,30 +50,39 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
             } else {
                 throw new RuntimeException("背景注解标记的类型需要为BufferedImage, 并且不可为空.");
             }
-
-            // 给背景绘制基本属性
-            for (Field field: fields) {
-                field.setAccessible(true);
-                //获取属性
-                String name = field.getName();
-                System.out.println("field: " + name + "-->开始绘制");
-                //获取属性值
-                Object value = field.get(content);
-                if (value instanceof String){
-                    String str = (String)value;
-                    PosterFontCss posterFontCss = field.getAnnotation(PosterFontCss.class);
-                    finalDraw = drawTextImpl(finalDraw,str,posterFontCss);
-                } else if (value instanceof BufferedImage){
-                    BufferedImage image = (BufferedImage) value;
-                    PosterImageCss posterImageCss = field.getAnnotation(PosterImageCss.class);
-                    finalDraw = drawImageImpl(finalDraw,image,posterImageCss);
-                }
-
-            }
-            return finalDraw;
+            return loopDrawing(content,finalDraw,fields);
         } else {
             throw new RuntimeException("绘制字段为空,或者第一个属性不是背景,并且没有标记背景注解");
         }
+
+    }
+
+    protected Poster loopDrawing(E content, Poster base, Field[] fields){
+        // 给背景绘制基本属性
+        for (Field field: fields) {
+            field.setAccessible(true);
+            //获取属性
+            String name = field.getName();
+            System.out.println("field: " + name + "-->开始绘制");
+            //获取属性值
+            Object value;
+            try {
+                value = field.get(content);
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException("反射获取属性异常");
+            }
+            if (value instanceof String){
+                String str = (String)value;
+                PosterFontCss posterFontCss = field.getAnnotation(PosterFontCss.class);
+                base = drawTextImpl(base,str,posterFontCss);
+            } else if (value instanceof BufferedImage){
+                BufferedImage image = (BufferedImage) value;
+                PosterImageCss posterImageCss = field.getAnnotation(PosterImageCss.class);
+                base = drawImageImpl(base,image,posterImageCss);
+            }
+
+        }
+        return base;
 
     }
 
