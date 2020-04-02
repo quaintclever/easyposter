@@ -32,13 +32,20 @@
 - 有简单的注解支持
 - 项目仅引入了lombok简化代码（1.0 版本包含有spring core）
 
+maven
 ```xml
 <dependency>
   <groupId>com.github.quaintclever</groupId>
   <artifactId>easyposter</artifactId>
-  <version>1.0</version>
+  <version>1.2</version>
 </dependency>
 ```
+gradle
+```groovy
+// https://mvnrepository.com/artifact/com.github.quaintclever/easyposter
+compile group: 'com.github.quaintclever', name: 'easyposter', version: '1.2'
+```
+
 
 ## 注解样例
 
