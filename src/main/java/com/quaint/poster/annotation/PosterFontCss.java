@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  *
  * @author quaint
- * @date 30 March 2020
+ *  30 March 2020
  * @since 1.0
  */
 @Target(ElementType.FIELD)
@@ -39,9 +39,15 @@ public @interface PosterFontCss {
      */
     int[] canNewLine() default {0,0,1};
 
+
+    /**
+     * @return 是否包含删除线, 目前不支持与换行同时使用
+     */
+    boolean hasDelLine() default false;
+
     /**
      * 优先级  设置该属性时 position x 失效 (暂未实现)
-     * center > right > left
+     * center  right  left
      */
     boolean center() default false;
 

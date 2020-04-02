@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 标签文本装饰, 一行多个并排标签.
  *
  * @author quaint
- * @date 21 February 2020
+ *  21 February 2020
  * @since 1.0
  */
 @EqualsAndHashCode(callSuper = true)

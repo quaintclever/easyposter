@@ -5,19 +5,16 @@ import com.quaint.poster.annotation.PosterFontCss;
 import com.quaint.poster.annotation.PosterImageCss;
 import com.quaint.poster.core.abst.Poster;
 import com.quaint.poster.core.decorators.BackgroundDecorator;
-import com.quaint.poster.core.decorators.ImageDecorator;
-import com.quaint.poster.core.decorators.TextDecorator;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Field;
 
 /**
  * @author quaint
- *  30 March 2020
- * @since 1.0
+ *  02 April 2020
+ * @since 1.3
  */
-public class PosterDefaultImpl<E> implements PosterTemplate<E> {
+public class PosterDefaultPlusImpl<E> extends PosterDefaultImpl<E>{
 
 
     @Override
@@ -71,57 +68,6 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
 
     }
 
-    /**
-     * 绘制文本装饰器
-     * @param base 基础图片
-     * @param text 要绘制的文本
-     * @return poster
-     */
-    protected Poster drawTextImpl(Poster base, String text, PosterFontCss ann){
-
-        if (ann==null){
-            return base;
-        }
-
-        System.out.println("【 ===> drawTextImpl <=== 】method start: ");
-
-        return new TextDecorator(base).toBuilder()
-                .positionX(ann.position()[0])
-                .positionY(ann.position()[1])
-                .fontSize(ann.size())
-                // 暂不支持 换行和 删除线同时进行
-                .delLine(ann.hasDelLine() && ann.canNewLine()[0] !=1 )
-                .canNewLine(ann.canNewLine()[0]==1)
-                .width(ann.canNewLine()[1])
-                .newLineLimit(ann.canNewLine()[2])
-                .color(new Color(ann.color()[0],ann.color()[1],ann.color()[2]))
-                .content(text)
-                .build();
-    }
-
-    /**
-     * 绘制图片装饰器
-     * @param base 基础图片
-     * @param image 要绘制的图片
-     * @return poster
-     */
-    protected Poster drawImageImpl(Poster base, BufferedImage image, PosterImageCss ann){
-
-        if (ann == null){
-            return base;
-        }
-
-        System.out.println("【 ===> drawImageImpl <=== 】method start: ");
-
-        return new ImageDecorator(base).toBuilder()
-                .positionX(ann.position()[0])
-                .positionY(ann.position()[1])
-                .width(ann.width())
-                .height(ann.height())
-                .circle(ann.circle())
-                .image(image)
-                .build();
-    }
 
 
 }

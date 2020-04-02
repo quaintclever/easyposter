@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 /**
  * 图片装饰
  * @author quaint
- * @date 21 February 2020
+ *  21 February 2020
  * @since 1.0
  */
 @EqualsAndHashCode(callSuper = true)

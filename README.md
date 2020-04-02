@@ -38,7 +38,7 @@
 ```java
 /**
  * @author quaint
- * @date 30 March 2020
+ *  30 March 2020
  * @since 1.0
  */
 @EqualsAndHashCode(callSuper = true)
@@ -88,7 +88,7 @@ public class SamplePoster extends AbstractDefaultPoster {
 /**
  * 绘制海报本地测试
  * @author quaint
- * @date 21 February 2020
+ *  21 February 2020
  * @since 1.0
  */
 public class PosterTest {

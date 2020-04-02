@@ -13,7 +13,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * @author quaint
- * @date 30 March 2020
+ *  30 March 2020
  * @since 1.0
  */
 @EqualsAndHashCode(callSuper = true)
@@ -42,8 +42,14 @@ public class SamplePoster extends AbstractDefaultPoster {
     /**
      * 广告语
      */
-    @PosterFontCss(position = {27,70},center = true, size = 22, color = {255,255,255}, canNewLine={1,221,7})
+    @PosterFontCss(position = {27,70}, size = 22, color = {255,255,255}, canNewLine={1,221,7})
     private String slogan;
+
+    /**
+     * 删除线测试
+     */
+    @PosterFontCss(position = {151,32}, color = {255,255,255}, hasDelLine = true)
+    private String delTest;
 
     /**
      * 主图
