@@ -4,6 +4,7 @@ import com.quaint.poster.annotation.PosterBackground;
 import com.quaint.poster.annotation.PosterFontCss;
 import com.quaint.poster.annotation.PosterImageCss;
 import com.quaint.poster.annotation.PosterSignNotice;
+import com.quaint.poster.core.abst.AbstractPosterDecorator;
 import com.quaint.poster.core.abst.Poster;
 import com.quaint.poster.core.decorators.BackgroundDecorator;
 import sun.font.FontDesignMetrics;
@@ -32,11 +33,11 @@ public class PosterDefaultPlusImpl<E> extends PosterDefaultImpl<E>{
         }
 
         // 最后需要执行绘制方法的类
-        Poster finalDraw;
+        AbstractPosterDecorator finalDraw;
         BufferedImage bg = null;
         int bgWidth = 0;
         int bgHeight = 0;
-        Map<String,Integer> map = new HashMap<>(8);
+        Map<String,Integer> exInts = new HashMap<>(8);
         boolean error = false;
 
         for (Field field : fields) {
@@ -87,10 +88,10 @@ public class PosterDefaultPlusImpl<E> extends PosterDefaultImpl<E>{
                         int line = fm.stringWidth(str)/annFont.canNewLine()[1] > annFont.canNewLine()[2]
                                 ? annFont.canNewLine()[2]
                                 : fm.stringWidth(str)/annFont.canNewLine()[1];
-                        if (map.get(annNotice.sign()) == null){
-                            map.put(annNotice.sign(),line * annFont.size());
+                        if (exInts.get(annNotice.sign()) == null){
+                            exInts.put(annNotice.sign(),line * annFont.size());
                         } else {
-                            map.put(annNotice.sign(), map.get(annNotice.sign())+line* annFont.size());
+                            exInts.put(annNotice.sign(), exInts.get(annNotice.sign())+line* annFont.size());
                         }
                     }
 
@@ -105,11 +106,12 @@ public class PosterDefaultPlusImpl<E> extends PosterDefaultImpl<E>{
 
         if (bg != null){
             AtomicInteger add = new AtomicInteger(0);
-            map.forEach((k,v)-> add.addAndGet(v));
+            exInts.forEach((k,v)-> add.addAndGet(v));
             finalDraw = new BackgroundDecorator().toBuilder()
                     .bgImage(bg)
                     .width(bgWidth)
                     .height(bgHeight + add.get())
+                    .exInts(exInts)
                     .build();
         } else {
             throw new RuntimeException("No background found error!");

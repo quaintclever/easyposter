@@ -10,6 +10,7 @@ import sun.font.FontDesignMetrics;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -70,9 +71,9 @@ public class LabelTextDecorator extends AbstractPosterDecorator {
     }
 
     @Builder(toBuilder = true)
-    public LabelTextDecorator(Poster poster, int positionX, int positionY, int width, int height, Font font, int fontSize, Color color,
-                              List<String> contentList, int fontStyle, BufferedImage tipBg, int tipMargin, int bgHeight) {
-        super(poster, positionX, positionY, width, height);
+    public LabelTextDecorator(Poster poster, int positionX, int positionY, int width, int height, Map<String,Integer> exInts, Map<String,String> exStrings,
+                              Font font, int fontSize, Color color, List<String> contentList, int fontStyle, BufferedImage tipBg, int tipMargin, int bgHeight) {
+        super(poster, positionX, positionY, width, height, exInts, exStrings);
         this.font = font;
         this.fontSize = fontSize;
         this.color = color;

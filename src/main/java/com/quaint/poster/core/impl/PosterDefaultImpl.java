@@ -3,6 +3,8 @@ package com.quaint.poster.core.impl;
 import com.quaint.poster.annotation.PosterBackground;
 import com.quaint.poster.annotation.PosterFontCss;
 import com.quaint.poster.annotation.PosterImageCss;
+import com.quaint.poster.annotation.PosterSign;
+import com.quaint.poster.core.abst.AbstractPosterDecorator;
 import com.quaint.poster.core.abst.Poster;
 import com.quaint.poster.core.decorators.BackgroundDecorator;
 import com.quaint.poster.core.decorators.ImageDecorator;
@@ -29,7 +31,7 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
         if (fields.length>0 && fields[0].getAnnotation(PosterBackground.class) != null){
 
             // 最后需要执行绘制方法的类
-            Poster finalDraw;
+            AbstractPosterDecorator finalDraw;
             PosterBackground ann = fields[0].getAnnotation(PosterBackground.class);
 
             fields[0].setAccessible(true);
@@ -57,7 +59,7 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
 
     }
 
-    protected Poster loopDrawing(E content, Poster base, Field[] fields){
+    protected AbstractPosterDecorator loopDrawing(E content, AbstractPosterDecorator base, Field[] fields){
         // 给背景绘制基本属性
         for (Field field: fields) {
             field.setAccessible(true);
@@ -92,7 +94,7 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
      * @param text 要绘制的文本
      * @return poster
      */
-    protected Poster drawTextImpl(Poster base, String text, PosterFontCss ann){
+    protected AbstractPosterDecorator drawTextImpl(AbstractPosterDecorator base, String text, PosterFontCss ann){
 
         if (ann==null){
             return base;
@@ -111,6 +113,8 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
                 .newLineLimit(ann.canNewLine()[2])
                 .color(new Color(ann.color()[0],ann.color()[1],ann.color()[2]))
                 .content(text)
+                .exInts(base.getExInts())
+                .exStrings(base.getExStrings())
                 .build();
     }
 
@@ -120,7 +124,7 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
      * @param image 要绘制的图片
      * @return poster
      */
-    protected Poster drawImageImpl(Poster base, BufferedImage image, PosterImageCss ann){
+    protected AbstractPosterDecorator drawImageImpl(AbstractPosterDecorator base, BufferedImage image, PosterImageCss ann){
 
         if (ann == null){
             return base;
@@ -135,6 +139,8 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
                 .height(ann.height())
                 .circle(ann.circle())
                 .image(image)
+                .exInts(base.getExInts())
+                .exStrings(base.getExStrings())
                 .build();
     }
 

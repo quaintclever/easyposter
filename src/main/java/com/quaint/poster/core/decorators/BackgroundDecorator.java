@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 /**
  * 背景 (绘制的模板,无需成为别人的装饰)
@@ -24,13 +25,14 @@ public class BackgroundDecorator extends AbstractPosterDecorator {
      */
     private BufferedImage bgImage;
 
+
     public BackgroundDecorator() {
         super(null);
     }
 
     @Builder(toBuilder = true)
-    public BackgroundDecorator(Poster poster, int positionX, int positionY, int width, int height, BufferedImage bgImage) {
-        super(poster,positionX,positionY,width,height);
+    public BackgroundDecorator(Poster poster, int positionX, int positionY, int width, int height, Map<String,Integer> exInts, Map<String,String> exStrings, BufferedImage bgImage) {
+        super(poster,positionX,positionY,width,height,exInts,exStrings);
         this.bgImage = bgImage;
     }
 

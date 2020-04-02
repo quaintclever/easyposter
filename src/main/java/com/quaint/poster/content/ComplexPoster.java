@@ -8,7 +8,6 @@ import lombok.EqualsAndHashCode;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Map;
 
 /**
  *
@@ -111,9 +110,5 @@ public class ComplexPoster extends AbstractDefaultPoster {
     @PosterImageCss(position = {558,1020},width = 133, height = 133)
     private BufferedImage qrcode;
 
-    /**
-     * 额外的int 列表
-     */
-    private Map<String,Integer> exInts;
 
 }

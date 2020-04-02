@@ -9,6 +9,7 @@ import sun.font.FontDesignMetrics;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 /**
  * 文本装饰
@@ -67,8 +68,9 @@ public class TextDecorator extends AbstractPosterDecorator {
     }
 
     @Builder(toBuilder = true)
-    public TextDecorator(Poster poster, int positionX, int positionY, int width, int height, Font font, int fontSize, Color color, String content, int fontStyle, boolean delLine, boolean canNewLine, int newLineLimit) {
-        super(poster, positionX, positionY, width, height);
+    public TextDecorator(Poster poster, int positionX, int positionY, int width, int height, Map<String,Integer> exInts, Map<String,String> exStrings,
+                         Font font, int fontSize, Color color, String content, int fontStyle, boolean delLine, boolean canNewLine, int newLineLimit) {
+        super(poster, positionX, positionY, width, height,exInts,exStrings);
         this.font = font;
         this.fontSize = fontSize;
         this.color = color;

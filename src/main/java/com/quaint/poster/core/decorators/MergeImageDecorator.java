@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -36,8 +37,9 @@ public class MergeImageDecorator extends AbstractPosterDecorator {
     }
 
     @Builder(toBuilder = true)
-    public MergeImageDecorator(Poster poster, int positionX, int positionY, int width, int height, List<BufferedImage> images) {
-        super(poster,positionX,positionY,width,height);
+    public MergeImageDecorator(Poster poster, int positionX, int positionY, int width, int height, Map<String,Integer> exInts, Map<String,String> exStrings,
+                               List<BufferedImage> images) {
+        super(poster,positionX,positionY,width,height,exInts,exStrings);
         this.images = images;
     }
 

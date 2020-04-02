@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
+import java.util.Map;
 
 /**
  * 图片装饰
@@ -35,8 +36,9 @@ public class ImageDecorator extends AbstractPosterDecorator {
     }
 
     @Builder(toBuilder = true)
-    public ImageDecorator(Poster poster, int positionX, int positionY, int width, int height, BufferedImage image, boolean circle) {
-        super(poster,positionX,positionY,width,height);
+    public ImageDecorator(Poster poster, int positionX, int positionY, int width, int height, Map<String,Integer> exInts, Map<String,String> exStrings,
+                          BufferedImage image, boolean circle) {
+        super(poster,positionX,positionY,width,height,exInts,exStrings);
         this.image = image;
         this.circle = circle;
     }

@@ -29,6 +29,17 @@ public abstract class AbstractPosterDecorator implements Poster {
 
     protected int height;
 
+    /**
+     * 额外的int 列表
+     */
+    protected Map<String,Integer> exInts;
+
+    /**
+     * 额外的 string 列表
+     */
+    protected Map<String,String> exStrings;
+
+
     public AbstractPosterDecorator(Poster poster){
         this.poster = poster;
     }
@@ -40,11 +51,11 @@ public abstract class AbstractPosterDecorator implements Poster {
 
     @Override
     public Map<String, Integer> getExInts() {
-        return null;
+        return exInts;
     }
 
     @Override
     public Map<String, String> getExStrings() {
-        return null;
+        return exStrings;
     }
 }

@@ -4,7 +4,6 @@ import com.quaint.poster.core.abst.AbstractDefaultPoster;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Tolerate;
 
 import java.awt.image.BufferedImage;

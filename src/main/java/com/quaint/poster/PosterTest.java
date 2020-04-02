@@ -91,7 +91,7 @@ public class PosterTest {
         contentTip.add("许愿");
         BufferedImage tipBg = ImageIO.read(new ClassPathResource("image/tipbg.png").getInputStream());
         LabelTextDecorator drawLabelText = new LabelTextDecorator(drawShopName).toBuilder()
-                .positionX(43).positionY(1022)
+                .positionX(43).positionY(1022+drawAnn.getExInts().get("default"))
                 .tipBg(tipBg).contentList(contentTip)
                 .tipMargin(30)
                 .color(new Color(216, 11, 42))
@@ -99,7 +99,7 @@ public class PosterTest {
 
         // 10. 绘制 长按识别二维码
         TextDecorator drawIdentifyQrcode = new TextDecorator(drawLabelText).toBuilder()
-                .positionX(567).positionY(1153)
+                .positionX(567).positionY(1153 + drawAnn.getExInts().get("default"))
                 .fontSize(16)
                 .content("长按识别二维码")
                 .color(new Color(153, 153, 153)).build();
