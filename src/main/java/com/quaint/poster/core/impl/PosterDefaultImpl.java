@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
  *  30 March 2020
  * @since 1.0
  */
+@Deprecated
 public class PosterDefaultImpl<E> implements PosterTemplate<E> {
 
 

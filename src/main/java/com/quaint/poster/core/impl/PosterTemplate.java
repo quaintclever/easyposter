@@ -5,8 +5,9 @@ import com.quaint.poster.core.abst.Poster;
 /**
  * @author quaint
  *  30 March 2020
- * @since 1.0
+ * @since 1.2
  */
+@Deprecated
 public interface PosterTemplate<E> {
 
     /**
