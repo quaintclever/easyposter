@@ -1,153 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.quaintclever</groupId>
-    <artifactId>easyposter</artifactId>
-    <version>1.2</version>
-    <packaging>jar</packaging>
-    <name>easyposter</name>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sensin.poster</groupId>
+	<artifactId>service-common-easyposter</artifactId>
+	<version>1.2</version>
+	<packaging>jar</packaging>
+	<name>easyposter</name>
 
-    <description>easyposter is a awt handle poster tools in Java</description>
+	<description>easyposter is a awt handle poster tools in Java</description>
 
-    <url>https://github.com/quaintclever/easyposter</url>
-    <inceptionYear>2020</inceptionYear>
+	<url>https://github.com/quaintclever/easyposter</url>
+	<inceptionYear>2020</inceptionYear>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>1.8</jdk.version>
-        <!--<gpg.skip>true</gpg.skip>-->
-        <!--<maven.javadoc.skip>true</maven.javadoc.skip>-->
-    </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.8</jdk.version>
+	</properties>
 
-    <scm>
-        <url>https://github.com/quaintclever/easyposter</url>
-        <connection>scm:git@github.com:quaintclever/easyposter.git</connection>
-        <developerConnection>scm:git@github.com:quaintclever/easyposter.git</developerConnection>
-    </scm>
+	<scm>
+		<url>https://github.com/lilun01/easyposter</url>
+		<connection>scm:https://github.com/lilun01/easyposter.git</connection>
+	</scm>
 
-    <developers>
-        <developer>
-            <name>Quaint</name>
-            <email>857776215@qq.com</email>
-        </developer>
-    </developers>
+	<developers>
+		<developer>
+			<name>Quaint/lilun</name>
+			<email>1547709975@qq.com</email>
+		</developer>
+	</developers>
 
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
 
-    <dependencies>
+	<dependencies>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.4</version>
-        </dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.4</version>
+		</dependency>
 
-    </dependencies>
+	</dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-    <profiles>
-        <profile>
-            <id>release</id>
-            <build>
-                <plugins>
-                    <!-- Source -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>2.1</version>
-                        <configuration>
-                            <attach>true</attach>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <phase>compile</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <!-- Javadoc -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <!-- GPG -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
-                        <executions>
-                            <execution>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <!-- sonatype -->
-                    <plugin>
-                        <groupId>org.sonatype.plugins</groupId>
-                        <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.7</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <serverId>ossrh</serverId>
-                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>false</autoReleaseAfterClose>
-                        </configuration>
-                    </plugin>
+	<distributionManagement>
+	    <!-- 私服地址  要打包到私服还需要配置maven setting.xml 中<server></server> -->
+		<repository>
+			<id>maven-releases</id>
+			<url>http://maven.sensin-tech.cn/repository/maven-releases/</url>
+		</repository>
+	</distributionManagement>
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-compiler-plugin</artifactId>
+						<version>${maven-compiler-plugin.version}</version>
+						<configuration>
+							<source>${java.version}</source>
+							<target>${java.version}</target>
+							<encoding>${project.build.sourceEncoding}</encoding>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>${maven-resources-plugin.version}</version>
+						<configuration>
+							<encoding>${project.build.sourceEncoding}</encoding>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 
-                </plugins>
-            </build>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-                </snapshotRepository>
-                <repository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
-
-        </profile>
-    </profiles>
+		</profile>
+	</profiles>
 
 
 

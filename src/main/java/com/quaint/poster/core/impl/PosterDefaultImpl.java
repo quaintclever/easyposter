@@ -7,10 +7,13 @@ import com.quaint.poster.core.abst.Poster;
 import com.quaint.poster.core.decorators.BackgroundDecorator;
 import com.quaint.poster.core.decorators.ImageDecorator;
 import com.quaint.poster.core.decorators.TextDecorator;
+//import com.sensin.util.font.FontUtil;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Field;
+
+import javax.swing.plaf.FontUIResource;
 
 /**
  * @author quaint
@@ -80,7 +83,12 @@ public class PosterDefaultImpl<E> implements PosterTemplate<E> {
             return base;
         }
 
+       // Font font = new Font("思源黑体 CN Normal",Font.BOLD,10);
+        Font font = new Font(ann.fontName(),ann.fontStyle(),10);
+
+        //Font font = FontUtil.getSourceHanSansCN("font/SourceHanSansCN-Normal.ttf");
         return new TextDecorator(base).toBuilder()
+        		.font(font)
                 .positionX(ann.position()[0])
                 .positionY(ann.position()[1])
                 .fontSize(ann.size())

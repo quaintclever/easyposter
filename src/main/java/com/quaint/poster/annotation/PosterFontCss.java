@@ -1,5 +1,6 @@
 package com.quaint.poster.annotation;
 
+import java.awt.Font;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -25,6 +26,16 @@ public @interface PosterFontCss {
      * 字体大小
      */
     int size() default 18;
+    
+    /**
+     * 字体名称
+     */
+    String fontName() default "微软雅黑";
+    
+    /**
+     * 字体样式
+     */
+    int fontStyle() default Font.PLAIN;
 
     /**
      * 颜色 默认黑色
